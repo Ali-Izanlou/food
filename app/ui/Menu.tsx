@@ -8,6 +8,7 @@ import Image from "next/image";
 
 export default function Menu() {
 
+    
     const fetcher = (url: string) => axios.get(url).then(res => res.data)
     const { data, error, isLoading } = useSWR('http://185.181.182.21:8000/restaurant/api/v1/caffe_product/', fetcher)
 

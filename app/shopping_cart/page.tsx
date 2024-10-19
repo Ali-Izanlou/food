@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function ShoppingCart() {
 
     return (
-        <div className=" overflow-x-auto shadow-md sm:rounded-lg mt-28">
+        <div className=" overflow-x-auto shadow-md sm:rounded-lg ">
             <table className="w-full text-sm text-left  ">
                 <thead className="text-sm text-gray-900  bg-zinc-500 ">
                     <tr>
@@ -37,7 +37,7 @@ export default function ShoppingCart() {
                                 <button className="inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 " type="button">
                                     <span className="sr-only">Quantity button</span>
                                     <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h16" />
                                     </svg>
                                 </button>
                                 <div>
@@ -46,7 +46,7 @@ export default function ShoppingCart() {
                                 <button className="inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-gray-500 bg-green-500 border border-gray-300 rounded-full focus:outline-none focus:ring-4 focus:ring-gray-200 hover:bg-green-600" type="button">
                                     <span className="sr-only">Quantity button</span>
                                     <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 1v16M1 9h16" />
                                     </svg>
                                 </button>
                             </div>

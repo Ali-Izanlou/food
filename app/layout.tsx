@@ -1,4 +1,5 @@
 import "./globals.css";
+import ProductProvider from "./lib/context/Provider";
 import Header from "./ui/Header";
 import localFont from 'next/font/local'
 
@@ -17,10 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${fontVaz.className} `} >
       <body className="container bg-zinc-800 ">
-        <Header />
-        <main>
-          {children}
-        </main>
+        <ProductProvider>
+          <Header />
+          <main className="mt-28">
+            {children}
+          </main>
+        </ProductProvider>
       </body>
     </html>
   );
