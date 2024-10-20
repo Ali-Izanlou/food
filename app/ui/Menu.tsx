@@ -6,11 +6,13 @@ import Link from "next/link";
 import clsx from "clsx";
 import Image from "next/image";
 
-export default function Menu() {
+export default function Menu(props:any) {
 
     
     const fetcher = (url: string) => axios.get(url).then(res => res.data)
     const { data, error, isLoading } = useSWR('http://185.181.182.21:8000/restaurant/api/v1/caffe_product/', fetcher)
+
+
 
     return (
         <>
@@ -34,15 +36,16 @@ export default function Menu() {
             <>
                 {data && data.map((i: { name: string }) =>
 
-                    <Link href={(i.name).replaceAll(' ', "")} key={i.name} className={clsx(
-                        " relative text-center transition-all  delay-150 duration-500  hover:duration-1000  h-full hover:delay-150 bg-cover bg-no-repeat rounded-full bg-black opacity-80",
+                    <Link href={(i.name).replaceAll(' ', "")} key={i.name}  className={clsx(
+                        " relative text-center transition-all  delay-150 duration-500  hover:duration-1000  h-full hover:delay-150 bg-cover bg-no-repeat rounded-full bg-black opacity-80 ",
                         {
                             "bg-[url('../public/image/ir1.jpg')] ": i.name === "iranian food",
                             "hover:bg-[url('../public/image/ir2.jpg')] ": i.name === "iranian food",
                             "bg-[url('../public/image/ar1.jpg')] ": i.name === "Arabic foods",
                             "hover:bg-[url('../public/image/ar2.jpg')] ": i.name === "Arabic foods",
                             "bg-[url('../public/image/ca1.jpg')] ": i.name === " coffe shop",
-                            "hover:bg-[url('../public/image/ca2.jpg')] ": i.name === " coffe shop",
+                            "hover:bg-[url('../public/image/ca2.jpg')] ": i.name === " coffe shop",                            
+                            "ring-4 ring-green-500": props.route && props.route.name === i.name.replaceAll(' ', ""),                            
 
                         },)}>
                         <Image

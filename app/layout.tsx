@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className="container bg-zinc-800 ">
         <ProductProvider>
           <Header />
-          <main className="mt-28">
+          <main className="flex flex-col  items-center ">
             {children}
           </main>
         </ProductProvider>
