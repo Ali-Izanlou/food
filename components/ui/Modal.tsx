@@ -1,9 +1,21 @@
+'use client'
+
+import { contextProvider } from "@/provider/Context"
 import Image from "next/image"
+import { useContext, useRef } from "react"
+
 
 export default function Modal() {
+
+    const { setModal} = useContext(contextProvider)
+
+    const divModal = useRef<any>()
+
+    window.addEventListener('click', e =>  e.target === divModal.current && setModal(false))
+
     return (
-        <div className=" flex items-center justify-center z-10 fixed top-0 bottom-0 right-0 left-0 bg-black bg-opacity-80 ">
-            <div className="flex flex-col gap-8 bg-white p-8 rounded-lg desktop:w-[35%] tablet:w-[50%] w-full ">
+        <div  className=" flex items-center justify-center  fixed top-0 bottom-0 right-0 left-0 bg-black bg-opacity-80 ">
+            <div  ref={divModal} className="flex flex-col gap-8 bg-white p-8 rounded-lg desktop:w-[30%] tablet:w-[50%] w-full ">
                 <div>
                     <svg className="mb-5" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M21 32.121L13.5 24.6195L15.6195 22.5L21 27.879L32.3775 16.5L34.5 18.6225L21 32.121Z" fill="#1EA575" />

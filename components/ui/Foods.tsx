@@ -7,10 +7,14 @@ import AddBtn from "./button/AddBtn"
 import ShoppBtn from "./button/ShoppBtn"
 import ShoppingCart from "./ShoppingCart"
 import Modal from "./Modal"
+import { useContext } from "react"
+import { contextProvider } from "@/provider/Context"
 
 export default function Foods() {
+    
+    const {food , shoppingCart ,modal, getData} = useContext(contextProvider)
 
-    const fetcher = (url: string) => axios.get(url).then(res => res.data)
+    const fetcher = (url: string) => axios.get(url).then(res => getData(res.data))
 
     const { data, isLoading, error } = useSWR("http://localhost:8000/foods/", fetcher)
 
@@ -29,6 +33,9 @@ export default function Foods() {
         price: number
     }
 
+    // document.body.addEventListener('click', () => setModal(false))
+
+    console.log(shoppingCart)
 
     return (
 
@@ -38,7 +45,7 @@ export default function Foods() {
                     <h1 className="text-Rose-900 font-bold text-5xl mb-10" >Desserts</h1>
 
                     <div className="grid desktop:grid-cols-3 tablet:grid-cols-2 gap-8">
-                        {data && data.map((f: dataType) =>
+                        {food && food.map((f: dataType) =>
 
                             <div className="flex flex-col gap-10 " key={f.name} >
 
@@ -53,7 +60,8 @@ export default function Foods() {
 
                                     />
                                     <div className="absolute -bottom-5 left-[60px] ">
-                                        <AddBtn />
+                                         <AddBtn item={f}/> 
+                                        {shoppingCart.find(i => i.name === f.name) && <ShoppBtn/>}
                                         {/* <ShoppBtn /> */}
                                     </div>
                                 </div>
@@ -74,7 +82,7 @@ export default function Foods() {
                     {isLoading === false && <ShoppingCart />}
                 </div>
             </div>
-            {/* <Modal /> */}
+            {modal && <Modal />}
         </>
 
     )
