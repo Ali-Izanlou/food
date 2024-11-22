@@ -13,7 +13,11 @@ interface ContextType {
   shoppingCart: shoppType[],
   setModal: (val: boolean) => void,
   getData: (data: dataType[]) => void
-  addCart: (data: dataType) => void
+  addCart: (data: dataType) => void,
+  increment: (data: dataType) => void,
+  decrement: (data: dataType) => void,
+  remove: (data: dataType) => void,
+
 }
 
 const ContextType = {
@@ -22,7 +26,10 @@ const ContextType = {
   shoppingCart: [],
   setModal: () => { },
   getData: () => { },
-  addCart: () => { }
+  addCart: () => { },
+  increment: () => { },
+  decrement: () => { },
+  remove: () => { },
 }
 
 export const contextProvider = createContext<ContextType>(ContextType)
@@ -38,10 +45,13 @@ export default function Context({
 
   const getData = (data: dataType[]) => dispatch({ type: "GET_DATA", payload: data })
   const addCart = (data: dataType) => dispatch({ type: "ADD_CART", payload: data })
+  const increment = (data: dataType) => dispatch({ type: "INCREMENT", payload: data })
+  const decrement = (data: dataType) => dispatch({ type: "DECREMENT", payload: data })
+  const remove = (data: dataType) => dispatch({ type: "REMOVE", payload: data })
 
 
   return (
-    <contextProvider.Provider value={{ ...state, modal, setModal, getData,addCart }}>
+    <contextProvider.Provider value={{ ...state, modal, setModal, getData, addCart, increment, decrement, remove }}>
       {children}
     </contextProvider.Provider>
   )

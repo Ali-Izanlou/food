@@ -9,33 +9,17 @@ import ShoppingCart from "./ShoppingCart"
 import Modal from "./Modal"
 import { useContext } from "react"
 import { contextProvider } from "@/provider/Context"
+import clsx from "clsx"
+import { dataType } from "@/lip/types/typeData"
 
 export default function Foods() {
-    
-    const {food , shoppingCart ,modal, getData} = useContext(contextProvider)
+
+    const { food, shoppingCart, modal, getData } = useContext(contextProvider)
 
     const fetcher = (url: string) => axios.get(url).then(res => getData(res.data))
 
     const { data, isLoading, error } = useSWR("http://localhost:8000/foods/", fetcher)
 
-    // console.log(data)
-
-    interface dataType {
-
-        image: {
-            thumbnail: string,
-            mobile: string,
-            tablet: string,
-            desktop: string
-        },
-        name: string,
-        category: string,
-        price: number
-    }
-
-    // document.body.addEventListener('click', () => setModal(false))
-
-    console.log(shoppingCart)
 
     return (
 
@@ -55,21 +39,19 @@ export default function Foods() {
                                         alt="image"
                                         width={350}
                                         height={350}
-                                        className="rounded-lg "
+                                        className={clsx("rounded-lg ", {"border-4 border-Red" :shoppingCart && shoppingCart.find(i => i.name === f.name)})}
                                         priority
 
                                     />
-                                    <div className="absolute -bottom-5 left-[60px] ">
-                                         <AddBtn item={f}/> 
-                                        {shoppingCart.find(i => i.name === f.name) && <ShoppBtn/>}
-                                        {/* <ShoppBtn /> */}
+                                    <div className="absolute -bottom-5 desktop:left-[63px] left-[80px] ">
+                                        {shoppingCart.find(i => i.name === f.name) ? <ShoppBtn item={ shoppingCart && shoppingCart.find(j => j.name === f.name && j)}/> : <AddBtn item={f} />}
                                     </div>
                                 </div>
 
 
                                 <div>
                                     <span className="text-Rose-500 ">{f.category}</span>
-                                    <h3 className="text-Rose-900 font-semibold text-xl">{f.name}</h3>
+                                    <h3 className="text-Rose-900 font-semibold text-xl ">{f.name}</h3>
                                     <span className="text-Red font-semibold text-xl">${f.price.toFixed(2)}</span>
                                 </div>
                             </div>
